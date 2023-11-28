@@ -27,7 +27,7 @@
   transform: translateX(30px);
 }
 
-/* breadcrumb transition */
+/* 面包屑 breadcrumb  */
 .breadcrumb-enter-active,
 .breadcrumb-leave-active {
   transition: all 0.5s;
@@ -47,7 +47,7 @@
   position: absolute;
 }
 
-/* 缩放过渡 */
+/* 缩放过渡  fade-scale */
 .fade-scale-enter-active,
 .fade-scale-leave-active {
   transition: transform 0.3s ease-in-out;
@@ -73,7 +73,7 @@
   transform: translateX(30px);
 }
 
-/* 旋转过渡 */
+/* 旋转过渡 fade-rotate */
 .fade-rotate-enter-active,
 .fade-rotate-leave-active {
   transition: transform 0.3s ease-in-out;

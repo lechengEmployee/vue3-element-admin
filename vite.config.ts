@@ -70,7 +70,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       // 自动导入参考： https://github.com/sxzz/element-plus-best-practices/blob/main/vite.config.ts
       AutoImport({
         // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
-        imports: ["vue", "@vueuse/core"],
+        imports: ["vue", "@vueuse/core", "pinia", "vue-router"],
         // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
         resolvers: [ElementPlusResolver(), IconsResolver({})],
         eslintrc: {
@@ -80,8 +80,8 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         },
         vueTemplate: true,
         // 配置文件生成位置(false:关闭自动生成)
-        dts: false,
-        // dts: "types/auto-imports.d.ts",
+        // dts: false,
+        dts: "src/typings/auto-imports.d.ts",
       }),
 
       Components({
@@ -94,8 +94,8 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         // 指定自定义组件位置(默认:src/components)
         dirs: ["src/components", "src/**/components"],
         // 配置文件位置 (false:关闭自动生成)
-        dts: false,
-        // dts: "types/components.d.ts",
+        // dts: false,
+        dts: "src/typings/components.d.ts",
       }),
 
       Icons({

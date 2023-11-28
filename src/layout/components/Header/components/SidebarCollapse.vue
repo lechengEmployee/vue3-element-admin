@@ -1,17 +1,15 @@
 <template>
-  <div
-    class="px-[15px] flex items-center justify-center color-[var(--el-text-color-regular)]"
-    @click="toggleClick"
-  >
+  <div class="sidebar-collapse" @click="toggleClick">
     <svg-icon
-      class="hamburger"
+      class="sidebar-collapse__icon"
       :class="{ 'is-active': isActive }"
-      icon-class="shrink"
+      icon-class="collapse"
     />
   </div>
 </template>
+
 <script setup lang="ts">
-defineProps({
+const props = defineProps({
   isActive: {
     required: true,
     type: Boolean,
@@ -27,13 +25,13 @@ function toggleClick() {
 </script>
 
 <style scoped lang="scss">
-.hamburger {
-  vertical-align: middle;
-  cursor: pointer;
-  transform: scaleX(-1);
-}
+.sidebar-collapse {
+  &__icon {
+    transform: scaleX(-1);
 
-.hamburger.is-active {
-  transform: scaleX(1);
+    &.is-active {
+      transform: scaleX(1);
+    }
+  }
 }
 </style>

@@ -54,17 +54,20 @@ declare global {
     /** 是否显示多标签导航 */
     tagsView: boolean;
     /** 是否显示侧边栏Logo */
-    sidebarLogo: boolean;
+    showSidebarLogo: boolean;
     /** 导航栏布局(left|top|mix) */
-    layout: string;
+    layout: LayoutType;
+
+    /** 主题模式(dark|light) */
+    theme: ThemeType;
+    /** 布局大小(default |large |small) */
+    size: SizeType;
+    /** 语言( zh-cn| en) */
+    language: LanguageType;
+
     /** 主题颜色 */
     themeColor: string;
-    /** 主题模式(dark|light) */
-    theme: string;
-    /** 布局大小(default |large |small) */
-    size: string;
-    /** 语言( zh-cn| en) */
-    language: string;
+
     /** 水印配置 */
     watermark: {
       /** 是否开启水印 */

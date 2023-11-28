@@ -1,5 +1,3 @@
-import { MenuTypeEnum } from "@/enums/MenuTypeEnum";
-
 /**
  * 菜单查询参数类型
  */

@@ -107,7 +107,7 @@ onMounted(() => {
 
     <div class="py-[8px] flex justify-between">
       <span class="text-xs">侧边栏 Logo</span>
-      <el-switch v-model="settingsStore.sidebarLogo" />
+      <el-switch v-model="settingsStore.showSidebarLogo" />
     </div>
 
     <el-divider>主题颜色</el-divider>

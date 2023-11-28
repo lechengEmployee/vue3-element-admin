@@ -1,16 +1,18 @@
+<!--侧边栏 -->
+<template>
+  <el-aside class="sidebar">
+    <Logo v-if="showSidebarLogo" :collapse="!appStore.sidebar.opened" />
+    <Menu :menu-list="permissionStore.routes" base-path="" />
+  </el-aside>
+</template>
+
 <script setup lang="ts">
-import TopMenu from "./TopMenu.vue";
-import LeftMenu from "./LeftMenu.vue";
-import Logo from "./Logo.vue";
-import { useSettingsStore } from "@/store/modules/settings";
-import { usePermissionStore } from "@/store/modules/permission";
-import { useAppStore } from "@/store/modules/app";
-import { storeToRefs } from "pinia";
+import { useSettingsStore, usePermissionStore, useAppStore } from "@/store";
 
 const settingsStore = useSettingsStore();
 const permissionStore = usePermissionStore();
 const appStore = useAppStore();
-const { sidebarLogo } = storeToRefs(settingsStore);
+const { showSidebarLogo } = storeToRefs(settingsStore);
 const layout = computed(() => settingsStore.layout);
 const showContent = ref(true);
 watch(
@@ -24,29 +26,11 @@ watch(
 );
 </script>
 
-<template>
-  <div
-    :class="{ 'has-logo': sidebarLogo }"
-    class="menu-wrap"
-    v-if="layout !== 'mix'"
-  >
-    <logo v-if="sidebarLogo" :collapse="!appStore.sidebar.opened" />
-    <el-scrollbar v-if="showContent">
-      <LeftMenu :menu-list="permissionStore.routes" base-path="" />
-    </el-scrollbar>
-    <NavRight v-if="layout === 'top'" />
-  </div>
-  <template v-else>
-    <div :class="{ 'has-logo': sidebarLogo }" class="menu-wrap">
-      <div class="header">
-        <logo v-if="sidebarLogo" :collapse="!appStore.sidebar.opened" />
-        <TopMenu />
-        <NavRight />
-      </div>
-    </div>
-  </template>
-</template>
 <style lang="scss" scoped>
+.sidebar {
+  width: $sideBarWidth;
+}
+
 :deep(.setting-container) {
   .setting-item {
     color: #fff;

@@ -4,8 +4,6 @@ import { isExternal } from "@/utils/index";
 import AppLink from "./Link.vue";
 import { RouteRecordRaw } from "vue-router";
 
-import Item from "./Item.vue";
-
 const props = defineProps({
   /**
    * 路由(eg:user)
@@ -102,7 +100,7 @@ function resolvePath(routePath: string) {
           :index="resolvePath(onlyOneChild.path)"
           :class="{ 'submenu-title-noDropdown': !isNest }"
         >
-          <item
+          <menu-title
             :icon="onlyOneChild.meta.icon || (item.meta && item.meta.icon)"
             :title="onlyOneChild.meta.title"
           />
@@ -113,14 +111,14 @@ function resolvePath(routePath: string) {
     <!-- 有子路由  -->
     <el-sub-menu v-else :index="resolvePath(item.path)" teleported>
       <template #title>
-        <item
+        <menu-title
           v-if="item.meta"
           :icon="item.meta && item.meta.icon"
           :title="item.meta.title"
         />
       </template>
 
-      <sidebar-item
+      <menu-item
         v-for="child in item.children"
         :key="child.path"
         :is-nest="true"

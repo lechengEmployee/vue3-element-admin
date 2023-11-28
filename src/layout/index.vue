@@ -1,9 +1,18 @@
+<template>
+  <el-container class="h-full">
+    <!--侧边栏-->
+    <Sidebar />
+    <el-container direction="vertical" class="relative">
+      <!--头部-->
+      <Header />
+      <!--主体-->
+      <Main />
+    </el-container>
+  </el-container>
+</template>
+
 <script setup lang="ts">
-import Main from "./main.vue";
-import { computed, watchEffect } from "vue";
 import { useWindowSize } from "@vueuse/core";
-import Sidebar from "./components/Sidebar/index.vue";
-import LeftMenu from "./components/Sidebar/LeftMenu.vue";
 
 import { useAppStore } from "@/store/modules/app";
 import { useSettingsStore } from "@/store/modules/settings";
@@ -77,35 +86,6 @@ function toggleSideBar() {
   appStore.toggleSidebar();
 }
 </script>
-
-<template>
-  <div :class="classObj" class="app-wrapper">
-    <!-- 手机设备侧边栏打开遮罩层 -->
-    <div
-      v-if="classObj.mobile && classObj.openSidebar"
-      class="drawer__background"
-      @click="handleOutsideClick"
-    ></div>
-
-    <Sidebar class="sidebar-container" />
-
-    <div v-if="layout === 'mix'" class="mix-wrapper">
-      <div class="mix-wrapper__left">
-        <LeftMenu :menu-list="mixLeftMenu" :base-path="activeTopMenu" />
-        <!-- 展开/收缩侧边栏菜单 -->
-        <div class="toggle-sidebar">
-          <hamburger
-            :is-active="appStore.sidebar.opened"
-            @toggle-click="toggleSideBar"
-          />
-        </div>
-      </div>
-      <Main />
-    </div>
-
-    <Main v-else />
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .app-wrapper {

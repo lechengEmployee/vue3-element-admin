@@ -8,7 +8,7 @@ export const useSettingsStore = defineStore("setting", () => {
   const tagsView = useStorage<boolean>("tagsView", defaultSettings.tagsView);
 
   const showSettings = ref<boolean>(defaultSettings.showSettings);
-  const sidebarLogo = ref<boolean>(defaultSettings.sidebarLogo);
+  const showSidebarLogo = ref<boolean>(defaultSettings.showSidebarLogo);
   const fixedHeader = useStorage<boolean>(
     "fixedHeader",
     defaultSettings.fixedHeader
@@ -27,7 +27,7 @@ export const useSettingsStore = defineStore("setting", () => {
     showSettings,
     fixedHeader,
     tagsView,
-    sidebarLogo,
+    showSidebarLogo,
     layout,
     themeColor,
     theme,
@@ -52,7 +52,7 @@ export const useSettingsStore = defineStore("setting", () => {
     showSettings,
     tagsView,
     fixedHeader,
-    sidebarLogo,
+    showSidebarLogo,
     layout,
     themeColor,
     changeSetting,
