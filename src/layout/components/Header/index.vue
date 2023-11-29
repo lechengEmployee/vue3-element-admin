@@ -3,7 +3,7 @@
   <el-header class="header">
     <div class="navbar">
       <SidebarCollapse
-        :isActive="appStore.sidebar.opened"
+        :isActive="!appStore.isCollapse"
         @toggle-click="toggleSideBar"
         class="navbar__btn w-10!"
       />

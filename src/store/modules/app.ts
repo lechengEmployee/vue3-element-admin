@@ -9,17 +9,10 @@ import en from "element-plus/es/locale/lang/en";
 // setup
 export const useAppStore = defineStore("app", () => {
   // state
-  const device = useStorage("device", "desktop");
   const size = useStorage<any>("size", defaultSettings.size);
   const language = useStorage("language", defaultSettings.language);
-
-  const sidebarStatus = useStorage("sidebarStatus", "closed");
-
-  const sidebar = reactive({
-    opened: sidebarStatus.value !== "closed",
-    withoutAnimation: false,
-  });
-  const activeTopMenu = useStorage("activeTop", "");
+  const isCollapse = useStorage<Boolean>("isCollapse", false);
+  const isMobile = useStorage<Boolean>("isMobile", false);
   /**
    * 根据语言标识读取对应的语言包
    */
@@ -33,29 +26,19 @@ export const useAppStore = defineStore("app", () => {
 
   // actions
   function toggleSidebar() {
-    sidebar.opened = !sidebar.opened;
-    sidebar.withoutAnimation = false;
-    if (sidebar.opened) {
-      sidebarStatus.value = "opened";
-    } else {
-      sidebarStatus.value = "closed";
-    }
+    isCollapse.value = !isCollapse.value;
   }
 
-  function closeSideBar(withoutAnimation: boolean) {
-    sidebar.opened = false;
-    sidebar.withoutAnimation = withoutAnimation;
-    sidebarStatus.value = "closed";
+  function closeSideBar() {
+    isCollapse.value = false;
   }
 
-  function openSideBar(withoutAnimation: boolean) {
-    sidebar.opened = true;
-    sidebar.withoutAnimation = withoutAnimation;
-    sidebarStatus.value = "opened";
+  function openSideBar() {
+    isCollapse.value = true;
   }
 
-  function toggleDevice(val: string) {
-    device.value = val;
+  function toggleDevice() {
+    isMobile.value = !isMobile.value;
   }
 
   function changeSize(val: string) {
@@ -69,25 +52,18 @@ export const useAppStore = defineStore("app", () => {
   function changeLanguage(val: string) {
     language.value = val;
   }
-  /**
-   * 混合模式顶部切换
-   */
-  function changeTopActive(val: string) {
-    activeTopMenu.value = val;
-  }
+
   return {
-    device,
-    sidebar,
+    isMobile,
+    isCollapse,
     language,
     locale,
     size,
-    activeTopMenu,
     toggleDevice,
     changeSize,
     changeLanguage,
     toggleSidebar,
     closeSideBar,
     openSideBar,
-    changeTopActive,
   };
 });

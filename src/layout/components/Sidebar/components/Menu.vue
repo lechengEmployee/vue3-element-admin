@@ -1,7 +1,7 @@
 <template>
   <el-menu
     :default-active="layout === 'top' ? '-' : currRoute.path"
-    :collapse="!appStore.sidebar.opened"
+    :collapse="!!appStore.isCollapse"
     :background-color="variables.menuBg"
     :text-color="variables.menuText"
     :active-text-color="variables.menuActiveText"
@@ -14,7 +14,7 @@
       :key="route.path"
       :item="route"
       :base-path="resolvePath(route.path)"
-      :is-collapse="!appStore.sidebar.opened"
+      :is-collapse="!!appStore.isCollapse"
     />
   </el-menu>
 </template>
