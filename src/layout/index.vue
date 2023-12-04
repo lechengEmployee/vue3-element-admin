@@ -14,11 +14,14 @@
 <script setup lang="ts">
 import { useWindowSize } from "@vueuse/core";
 
-import { useAppStore } from "@/store/modules/app";
-import { useSettingsStore } from "@/store/modules/settings";
-import { usePermissionStore } from "@/store/modules/permission";
-const permissionStore = usePermissionStore();
+import { useAppStore, useSettingsStore } from "@/store";
 const { width } = useWindowSize();
+
+const appStore = useAppStore();
+const settingsStore = useSettingsStore();
+
+const layout = computed(() => settingsStore.layout);
+
 /**
  * 响应式布局容器固定宽度
  *
@@ -28,63 +31,21 @@ const { width } = useWindowSize();
  */
 const WIDTH = 992;
 
-const appStore = useAppStore();
-const settingsStore = useSettingsStore();
-
-const activeTopMenu = computed(() => {
-  return appStore.activeTopMenu;
-});
-// 混合模式左侧菜单
-const mixLeftMenu = computed(() => {
-  return permissionStore.mixLeftMenu;
-});
-const layout = computed(() => settingsStore.layout);
-const watermarkEnabled = computed(() => settingsStore.watermark.enabled);
-
-watch(
-  () => activeTopMenu.value,
-  (newVal) => {
-    if (layout.value !== "mix") return;
-    permissionStore.getMixLeftMenu(newVal);
-  },
-  {
-    deep: true,
-    immediate: true,
-  }
-);
-
-const classObj = computed(() => ({
-  hideSidebar: !appStore.sidebar.opened,
-  openSidebar: appStore.sidebar.opened,
-  withoutAnimation: appStore.sidebar.withoutAnimation,
-  mobile: appStore.device === "mobile",
-  isTop: layout.value === "top",
-  isMix: layout.value === "mix",
-}));
-
 watchEffect(() => {
   if (width.value < WIDTH) {
     appStore.toggleDevice("mobile");
-    appStore.closeSideBar(true);
+    appStore.closeSideBar();
   } else {
     appStore.toggleDevice("desktop");
 
     if (width.value >= 1200) {
       //大屏
-      appStore.openSideBar(true);
+      appStore.openSideBar();
     } else {
-      appStore.closeSideBar(true);
+      appStore.closeSideBar();
     }
   }
 });
-
-function handleOutsideClick() {
-  appStore.closeSideBar(false);
-}
-
-function toggleSideBar() {
-  appStore.toggleSidebar();
-}
 </script>
 
 <style lang="scss" scoped>

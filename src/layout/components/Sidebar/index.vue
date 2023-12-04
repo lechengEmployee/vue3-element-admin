@@ -1,9 +1,9 @@
 <!--侧边栏 -->
 <template>
-  <el-aside class="sidebar" :width="sideBarWidth">
+  <el-aside class="flex flex-col" :width="sideBarWidth">
     <Logo
       v-if="settingsStore.showSidebarLogo"
-      :collapse="appStore.isCollapse"
+      :collapse="!appStore.sidebarOpen"
     />
     <Menu :menu-list="permissionStore.routes" base-path="" />
   </el-aside>
@@ -17,16 +17,10 @@ const permissionStore = usePermissionStore();
 const appStore = useAppStore();
 
 const sideBarWidth = computed(() => {
-  if (appStore.device === "mobile") {
-    return appStore.isCollapse ? "0" : "210px";
+  if (appStore.isMobile) {
+    return appStore.sidebarOpen ? "210px" : "0";
   } else {
-    return appStore.isCollapse ? "54px" : "210px";
+    return appStore.sidebarOpen ? "210px" : "54px";
   }
 });
 </script>
-
-<style lang="scss" scoped>
-.sidebar1 {
-  width: $sideBarWidth;
-}
-</style>

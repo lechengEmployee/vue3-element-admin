@@ -2,11 +2,11 @@
   <transition name="fade-slide">
     <router-link
       v-if="settingsStore.showSidebarLogo"
-      class="wh-full flex-center h-[60px]"
+      class="wh-full flex-center h-[64px]"
       to="/"
     >
       <img :src="logo" class="w-5 h-5" />
-      <span v-show="collapse" class="ml-2 text-4">{{
+      <span v-show="!collapse" class="ml-2 text-4">{{
         settingsStore.title
       }}</span>
     </router-link>

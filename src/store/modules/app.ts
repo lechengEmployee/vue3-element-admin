@@ -11,8 +11,9 @@ export const useAppStore = defineStore("app", () => {
   // state
   const size = useStorage<any>("size", defaultSettings.size);
   const language = useStorage("language", defaultSettings.language);
-  const isCollapse = useStorage<Boolean>("isCollapse", false);
-  const isMobile = useStorage<Boolean>("isMobile", false);
+  const sidebarOpen = useStorage("sidebarOpen", true);
+  const isMobile = ref(false); // 使用 ref 创建响应式变量
+
   /**
    * 根据语言标识读取对应的语言包
    */
@@ -26,19 +27,19 @@ export const useAppStore = defineStore("app", () => {
 
   // actions
   function toggleSidebar() {
-    isCollapse.value = !isCollapse.value;
+    sidebarOpen.value = !sidebarOpen.value;
   }
 
   function closeSideBar() {
-    isCollapse.value = false;
+    sidebarOpen.value = false;
   }
 
   function openSideBar() {
-    isCollapse.value = true;
+    sidebarOpen.value = true;
   }
 
-  function toggleDevice() {
-    isMobile.value = !isMobile.value;
+  function toggleDevice(device: string) {
+    isMobile.value = device == "mobile";
   }
 
   function changeSize(val: string) {
@@ -55,7 +56,7 @@ export const useAppStore = defineStore("app", () => {
 
   return {
     isMobile,
-    isCollapse,
+    sidebarOpen,
     language,
     locale,
     size,

@@ -1,5 +1,5 @@
 <template>
-  <el-main>
+  <el-main class="main">
     <el-scrollbar>
       <router-view>
         <template #default="{ Component, route }">
@@ -15,7 +15,13 @@
 </template>
 
 <script setup lang="ts">
-import { useTagsViewStore } from "@/store/modules/tagsView";
+import { useTagsViewStore } from "@/store";
 
 const tagsViewStore = useTagsViewStore();
 </script>
+
+<style scoped lang="scss">
+.main {
+  background-color: var(--el-bg-color-page);
+}
+</style>

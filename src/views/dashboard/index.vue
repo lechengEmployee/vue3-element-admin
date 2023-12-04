@@ -257,7 +257,6 @@ orderCount.value = 2000;
 <style lang="scss" scoped>
 .dashboard-container {
   position: relative;
-  padding: 24px;
 
   .user-avatar {
     width: 40px;

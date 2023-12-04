@@ -1,37 +1,28 @@
 <template>
-  <el-menu
-    :default-active="layout === 'top' ? '-' : currRoute.path"
-    :collapse="!!appStore.isCollapse"
-    :background-color="variables.menuBg"
-    :text-color="variables.menuText"
-    :active-text-color="variables.menuActiveText"
-    :unique-opened="false"
-    :collapse-transition="false"
-    :mode="layout === 'top' ? 'horizontal' : 'vertical'"
-  >
-    <menu-item
-      v-for="route in menuList"
-      :key="route.path"
-      :item="route"
-      :base-path="resolvePath(route.path)"
-      :is-collapse="!!appStore.isCollapse"
-    />
-  </el-menu>
+  <el-scrollbar>
+    <el-menu
+      :default-active="currentRoute.path"
+      :collapse-transition="false"
+      :collapse="!appStore.sidebarOpen"
+      :unique-opened="false"
+      mode="vertical"
+    >
+      <menu-item
+        v-for="route in menuList"
+        :key="route.path"
+        :item="route"
+        :base-path="resolvePath(route.path)"
+      />
+    </el-menu>
+  </el-scrollbar>
 </template>
 
 <script lang="ts" setup>
-import { useRoute } from "vue-router";
-import { useSettingsStore } from "@/store/modules/settings";
-import { useAppStore } from "@/store/modules/app";
-import variables from "@/styles/variables.module.scss";
+import { useAppStore } from "@/store";
 
 import path from "path-browserify";
 import { isExternal } from "@/utils/index";
 
-const settingsStore = useSettingsStore();
-const appStore = useAppStore();
-const currRoute = useRoute();
-const layout = computed(() => settingsStore.layout);
 const props = defineProps({
   menuList: {
     required: true,
@@ -46,6 +37,8 @@ const props = defineProps({
   },
 });
 
+const appStore = useAppStore();
+const currentRoute = useRoute(); // 当前路由
 /**
  * 解析路径
  *

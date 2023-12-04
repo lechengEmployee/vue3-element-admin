@@ -2,18 +2,18 @@
 <template>
   <el-header class="header">
     <div class="navbar">
-      <SidebarCollapse
-        :isActive="!appStore.isCollapse"
+      <SidebarToggle
+        :isActive="!appStore.sidebarOpen"
         @toggle-click="toggleSideBar"
-        class="navbar__btn w-10!"
+        class="navbar-item w-10!"
       />
       <breadcrumb />
     </div>
     <div class="navbar">
-      <ThemeSelect class="navbar__btn" />
-      <FullScreen class="navbar__btn" />
-      <SizeSelect class="navbar__btn" />
-      <LangSelect class="navbar__btn" />
+      <ThemeSelect class="navbar-item" />
+      <FullScreen class="navbar-item" />
+      <SizeSelect class="navbar-item" />
+      <LangSelect class="navbar-item" />
       <UserAvatar />
     </div>
   </el-header>
@@ -40,7 +40,7 @@ function toggleSideBar() {
   .navbar {
     @apply flex-y-center h-full;
 
-    &__btn {
+    &-item {
       @apply h-full w-8 hover:bg-fill flex-center cursor-pointer;
     }
   }
