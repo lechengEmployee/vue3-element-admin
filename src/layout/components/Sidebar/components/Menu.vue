@@ -5,55 +5,41 @@
       :collapse-transition="false"
       :collapse="!appStore.sidebarOpen"
       :unique-opened="false"
+      @select="handleMenuSelect"
       mode="vertical"
     >
-      <menu-item
-        v-for="route in menuList"
-        :key="route.path"
-        :item="route"
-        :base-path="resolvePath(route.path)"
-      />
+      <menu-item v-for="menu in menus" :key="menu.path" :menu="menu" />
     </el-menu>
   </el-scrollbar>
 </template>
 
 <script lang="ts" setup>
 import { useAppStore } from "@/store";
-
-import path from "path-browserify";
-import { isExternal } from "@/utils/index";
+import router from "@/router";
 
 const props = defineProps({
-  menuList: {
+  menus: {
     required: true,
     default: () => {
       return [];
     },
     type: Array<any>,
   },
-  basePath: {
-    type: String,
-    required: true,
-  },
 });
 
 const appStore = useAppStore();
 const currentRoute = useRoute(); // 当前路由
-/**
- * 解析路径
- *
- * @param routePath 路由路径
- */
-function resolvePath(routePath: string) {
-  if (isExternal(routePath)) {
-    return routePath;
-  }
-  if (isExternal(props.basePath)) {
-    return props.basePath;
-  }
 
-  // 完整路径 = 父级路径(/level/level_3) + 路由路径
-  const fullPath = path.resolve(props.basePath, routePath); // 相对路径 → 绝对路径
-  return fullPath;
-}
+/**
+ * 菜单激活回调
+ *
+ * @param index 选中菜单项的 index, 一般为路由路径
+ */
+const handleMenuSelect = (index: string) => {
+  if (/^(https?:|http?:|mailto:|tel:)/.test(index)) {
+    window.open(index);
+  } else {
+    router.push(index);
+  }
+};
 </script>

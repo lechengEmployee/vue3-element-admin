@@ -1,3 +1,14 @@
+<template>
+  <el-scrollbar
+    ref="scrollContainer"
+    class="scroll-container"
+    :vertical="false"
+    @wheel.prevent="handleScroll"
+  >
+    <slot></slot>
+  </el-scrollbar>
+</template>
+
 <script setup lang="ts">
 import { useTagsViewStore } from "@/store/modules/tagsView";
 
@@ -91,17 +102,6 @@ defineExpose({
   moveToTarget,
 });
 </script>
-
-<template>
-  <el-scrollbar
-    ref="scrollContainer"
-    class="scroll-container"
-    :vertical="false"
-    @wheel.prevent="handleScroll"
-  >
-    <slot></slot>
-  </el-scrollbar>
-</template>
 
 <style lang="scss" scoped>
 .scroll-container {

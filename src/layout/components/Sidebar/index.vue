@@ -5,7 +5,7 @@
       v-if="settingsStore.showSidebarLogo"
       :collapse="!appStore.sidebarOpen"
     />
-    <Menu :menu-list="permissionStore.routes" base-path="" />
+    <Menu :menus="permissionStore.routes" />
   </el-aside>
 </template>
 
