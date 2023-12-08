@@ -8,7 +8,7 @@
       @select="handleMenuSelect"
       mode="vertical"
     >
-      <menu-item v-for="menu in menus" :key="menu.path" :menu="menu" />
+      <menu-item v-for="route in routes" :key="route.path" :route="route" />
     </el-menu>
   </el-scrollbar>
 </template>
@@ -18,7 +18,7 @@ import { useAppStore } from "@/store";
 import router from "@/router";
 
 const props = defineProps({
-  menus: {
+  routes: {
     required: true,
     default: () => {
       return [];

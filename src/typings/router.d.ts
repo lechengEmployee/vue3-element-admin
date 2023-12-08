@@ -18,5 +18,6 @@ declare module "vue-router" {
     breadcrumb?: boolean;
     /** 拥有菜单权限的角色编码集合 */
     roles?: string[];
+    noShowingChildren?: boolean;
   }
 }
