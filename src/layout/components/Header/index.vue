@@ -41,7 +41,7 @@ function toggleSideBar() {
     @apply flex-y-center h-full;
 
     &-item {
-      @apply h-full w-8 hover:bg-fill flex-center cursor-pointer;
+      @apply flex-center cursor-pointer hover:bg-fill h-full w-10;
     }
   }
 }

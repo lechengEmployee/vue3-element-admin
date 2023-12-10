@@ -41,7 +41,7 @@
           <svg-icon
             v-for="n in +row.importance ? +row.importance : 0"
             :key="n"
-            icon-class="star"
+            icon-name="star"
             class="icon-star"
           />
         </template>
@@ -63,7 +63,7 @@
 
       <el-table-column align="center" label="Drag" width="80">
         <template #default="{}">
-          <svg-icon class="drag-handler" icon-class="drag" />
+          <svg-icon class="drag-handler" icon-name="drag" />
         </template>
       </el-table-column>
     </el-table>

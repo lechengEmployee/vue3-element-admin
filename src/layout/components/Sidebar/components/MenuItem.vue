@@ -1,58 +1,56 @@
 <template>
-  <el-menu-item
-    v-if="
-      !route.meta?.hidden &&
-      hasOneShowingChild(route.children, route) &&
-      (!onlyOneChild?.children || onlyOneChild?.noShowingChildren) &&
-      !route.meta?.alwaysShow
-    "
-    :index="route.path"
-  >
-    <svg-icon :icon-class="onlyOneChild?.meta?.icon" />
-    <span>{{ translateRouteTitle(onlyOneChild?.meta?.title) }}</span>
+  <!-- 当前路由没有子菜单项 -->
+  <el-menu-item v-if="showMenuItem" :index="item.path">
+    <menu-title
+      :icon="onlyOneChild.meta?.icon"
+      :title="onlyOneChild.meta?.title"
+    />
   </el-menu-item>
 
-  <el-sub-menu :index="route.path" v-else-if="!route.meta?.hidden">
+  <!-- 当前路由有子菜单项 -->
+  <el-sub-menu :index="item.path" v-else-if="!item.meta?.hidden">
     <template #title>
-      <svg-icon :icon-class="route.meta?.icon" />
-      <span>{{ translateRouteTitle(route.meta?.title) }}</span>
+      <menu-title :icon="item.meta?.icon" :title="item.meta?.title" />
     </template>
-
-    <menu-item
-      v-for="child in route.children"
-      :key="child.path"
-      :route="child"
-    />
+    <!-- 递归渲染子菜单 -->
+    <menu-item v-for="child in item.children" :key="child.path" :item="child" />
   </el-sub-menu>
 </template>
 <script setup lang="ts">
-import { translateRouteTitle } from "@/utils/i18n";
 import { RouteRecordRaw } from "vue-router";
 
-const props = defineProps({
-  route: {
+const { item } = defineProps({
+  item: {
     type: Object as () => RouteRecordRaw,
     required: true,
   },
 });
 
-// 如果 menu 的 chidren 只有一个非隐藏的子元素，onlyOneChild 就是这个子元素
-const onlyOneChild = ref<RouteRecordRaw | null>(null);
+const showMenuItem = computed(() => {
+  return (
+    !item.meta?.hidden && // 菜单显示
+    hasSingleShowingChild(item.children, item) && // 只有一个子菜单或者没有子菜单
+    (!onlyOneChild.value.children || onlyOneChild.value?.noShowingChildren) && // 子菜单没有子菜单
+    !item.meta?.alwaysShow // 不始终显示
+  );
+});
+
+// 用于存储当前路由的唯一子菜单 ( 如果 item 的 chidren 只有一个子菜单，onlyOneChild 存储的就是这个子菜单)
+const onlyOneChild = ref<any>(null);
 
 /**
- * 判断当前路由是否只有一个子路由
+ * 判断是否只有一个子菜单/没有子菜单
  */
-function hasOneShowingChild(
+function hasSingleShowingChild(
   children: RouteRecordRaw[] = [],
   parent: RouteRecordRaw
 ) {
-  debugger;
-  // 显示的子路由集合
+  // 过滤出显示的子菜单
   const showingChildren = children.filter((route: RouteRecordRaw) => {
     if (route.meta?.hidden) {
       return false;
     } else {
-      onlyOneChild.value = route; // 如果只有一个子路由，onlyOneChild 就是这个子元素；如果多个子路由，此变量无效
+      onlyOneChild.value = route;
       return true;
     }
   });
@@ -62,7 +60,7 @@ function hasOneShowingChild(
     return true;
   }
 
-  // 如果没有子路由，显示父级路由
+  // 如果没有子菜单,显示当前菜单
   if (showingChildren.length === 0) {
     onlyOneChild.value = { ...parent, path: "", noShowingChildren: true };
     return true;

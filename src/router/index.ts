@@ -38,7 +38,6 @@ export const constantRoutes: RouteRecordRaw[] = [
           icon: "homepage",
           affix: true,
           keepAlive: true,
-          alwaysShow: false,
         },
       },
       {

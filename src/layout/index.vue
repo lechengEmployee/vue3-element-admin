@@ -1,11 +1,13 @@
 <template>
   <el-container class="h-full">
-    <!--侧边栏-->
+    <!-- 侧边栏 -->
     <Sidebar />
     <el-container direction="vertical" class="relative">
-      <!--头部-->
+      <!-- 头部 -->
       <Header />
-      <!--主体-->
+      <!-- 导航标签 -->
+      <NavTabs />
+      <!-- 主体 -->
       <Main />
     </el-container>
   </el-container>

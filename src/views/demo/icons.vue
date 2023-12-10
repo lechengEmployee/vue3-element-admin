@@ -14,7 +14,7 @@
               placement="top"
             >
               <div class="icon-item">
-                <svg-icon :icon-class="item" />
+                <svg-icon :icon-name="item" />
                 <span>{{ item }}</span>
               </div>
             </el-tooltip>
@@ -102,7 +102,7 @@ const icons = ref(ElementPlusIconsVue);
 const { copy } = useClipboard();
 
 function generateIconCode(symbol: any) {
-  return `<svg-icon icon-class="${symbol}" />`;
+  return `<svg-icon icon-name="${symbol}" />`;
 }
 
 function generateElementIconCode(symbol: any) {

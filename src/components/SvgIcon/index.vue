@@ -2,7 +2,7 @@
   <svg
     aria-hidden="true"
     class="svg-icon"
-    :style="'width:' + size + ';height:' + size"
+    :style="{ width: size, height: size }"
   >
     <use :xlink:href="symbolId" :fill="color" />
   </svg>
@@ -14,9 +14,9 @@ const props = defineProps({
     type: String,
     default: "icon",
   },
-  iconClass: {
+  iconName: {
     type: String,
-    required: false,
+    required: true,
     default: "",
   },
   color: {
@@ -29,7 +29,7 @@ const props = defineProps({
   },
 });
 
-const symbolId = computed(() => `#${props.prefix}-${props.iconClass}`);
+const symbolId = computed(() => `#${props.prefix}-${props.iconName}`);
 </script>
 
 <style scoped>

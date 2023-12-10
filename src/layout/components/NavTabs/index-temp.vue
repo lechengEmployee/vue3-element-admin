@@ -29,27 +29,27 @@
       :style="{ left: left + 'px', top: top + 'px' }"
     >
       <li @click="refreshSelectedTag(selectedTag)">
-        <svg-icon icon-class="refresh" />
+        <svg-icon icon-name="refresh" />
         刷新
       </li>
       <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">
-        <svg-icon icon-class="close" />
+        <svg-icon icon-name="close" />
         关闭
       </li>
       <li @click="closeOtherTags">
-        <svg-icon icon-class="close_other" />
+        <svg-icon icon-name="close_other" />
         关闭其它
       </li>
       <li v-if="!isFirstView()" @click="closeLeftTags">
-        <svg-icon icon-class="close_left" />
+        <svg-icon icon-name="close_left" />
         关闭左侧
       </li>
       <li v-if="!isLastView()" @click="closeRightTags">
-        <svg-icon icon-class="close_right" />
+        <svg-icon icon-name="close_right" />
         关闭右侧
       </li>
       <li @click="closeAllTags(selectedTag)">
-        <svg-icon icon-class="close_all" />
+        <svg-icon icon-name="close_all" />
         关闭所有
       </li>
     </ul>

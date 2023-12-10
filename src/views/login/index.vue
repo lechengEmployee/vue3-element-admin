@@ -29,7 +29,7 @@
       >
         <el-form-item prop="username">
           <div class="p-2">
-            <svg-icon icon-class="user" />
+            <svg-icon icon-name="user" />
           </div>
           <el-input
             ref="username"
@@ -48,7 +48,7 @@
         >
           <el-form-item prop="password">
             <span class="p-2">
-              <svg-icon icon-class="password" />
+              <svg-icon icon-name="password" />
             </span>
             <el-input
               v-model="loginData.password"
@@ -62,7 +62,7 @@
             />
             <span class="mr-2" @click="passwordVisible = !passwordVisible">
               <svg-icon
-                :icon-class="passwordVisible === false ? 'eye' : 'eye-open'"
+                :icon-name="passwordVisible === false ? 'eye' : 'eye-open'"
                 class="cursor-pointer"
               />
             </span>
@@ -72,7 +72,7 @@
         <!-- 验证码 -->
         <el-form-item prop="captchaCode">
           <span class="p-2">
-            <svg-icon icon-class="captcha" />
+            <svg-icon icon-name="captcha" />
           </span>
 
           <el-input

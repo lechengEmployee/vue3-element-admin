@@ -73,7 +73,7 @@ onMounted(() => {
       @click="visible = !visible"
     >
       <template #prepend>
-        <svg-icon :icon-class="inputValue" />
+        <svg-icon :icon-name="inputValue" />
       </template>
     </el-input>
 
@@ -116,7 +116,7 @@ onMounted(() => {
               <el-tooltip :content="iconName" placement="bottom" effect="light">
                 <svg-icon
                   color="var(--el-text-color-regular)"
-                  :icon-class="iconName"
+                  :icon-name="iconName"
                 />
               </el-tooltip>
             </li>

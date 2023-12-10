@@ -48,7 +48,7 @@
       >
         <el-table-column label="菜单名称" min-width="200">
           <template #default="scope">
-            <svg-icon :icon-class="scope.row.icon" />
+            <svg-icon :icon-name="scope.row.icon" />
             {{ scope.row.name }}
           </template>
         </el-table-column>

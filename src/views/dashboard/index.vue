@@ -87,7 +87,7 @@ orderCount.value = 2000;
             <el-statistic :value="99">
               <template #title>
                 <div class="flex items-center">
-                  <svg-icon icon-class="message" size="20px" />
+                  <svg-icon icon-name="message" size="20px" />
                   <span class="text-[16px] ml-1">消息</span>
                 </div>
               </template>
@@ -96,7 +96,7 @@ orderCount.value = 2000;
             <el-statistic :value="50">
               <template #title>
                 <div class="flex items-center">
-                  <svg-icon icon-class="todolist" size="20px" />
+                  <svg-icon icon-name="todolist" size="20px" />
                   <span class="text-[16px] ml-1">待办</span>
                 </div>
               </template>
@@ -106,7 +106,7 @@ orderCount.value = 2000;
             <el-statistic :value="10">
               <template #title>
                 <div class="flex items-center">
-                  <svg-icon icon-class="project" size="20px" />
+                  <svg-icon icon-name="project" size="20px" />
                   <span class="text-[16px] ml-1">项目</span>
                 </div>
               </template>
@@ -131,7 +131,7 @@ orderCount.value = 2000;
             <div class="text-lg text-right">
               {{ Math.round(visitCountOutput) }}
             </div>
-            <svg-icon icon-class="visit" size="2em" />
+            <svg-icon icon-name="visit" size="2em" />
           </div>
 
           <div
@@ -157,7 +157,7 @@ orderCount.value = 2000;
             <div class="text-lg text-right">
               {{ Math.round(dauCountOutput) }}
             </div>
-            <svg-icon icon-class="ip" size="2em" />
+            <svg-icon icon-name="ip" size="2em" />
           </div>
 
           <div
@@ -183,7 +183,7 @@ orderCount.value = 2000;
             <div class="text-lg text-right">
               {{ Math.round(amountOutput) }}
             </div>
-            <svg-icon icon-class="money" size="2em" />
+            <svg-icon icon-name="money" size="2em" />
           </div>
 
           <div
@@ -209,7 +209,7 @@ orderCount.value = 2000;
             <div class="text-lg text-right">
               {{ Math.round(orderCountOutput) }}
             </div>
-            <svg-icon icon-class="order" size="2em" />
+            <svg-icon icon-name="order" size="2em" />
           </div>
 
           <div
