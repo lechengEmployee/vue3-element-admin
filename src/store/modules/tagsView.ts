@@ -1,18 +1,15 @@
 import { defineStore } from "pinia";
 
-export const useTagsViewStore = defineStore("tagsView", () => {
+export const useTagsViewStore = defineStore("TagsView", () => {
   const visitedViews = ref<TagView[]>([]);
   const cachedViews = ref<string[]>([]);
-
-  console.log("first visitedViews", visitedViews, "cachedViews", cachedViews);
 
   /**
    * 添加已访问视图到已访问视图列表中
    */
   function addVisitedView(view: TagView) {
-    console.log("addVisitedView", visitedViews, view);
     // 如果已经存在于已访问的视图列表中，则不再添加
-    if (visitedViews.value.some((v) => v.fullPath === view.fullPath)) {
+    if (visitedViews.value.some((v) => v.path === view.path)) {
       return;
     }
     // 如果视图是固定的（affix），则在已访问的视图列表的开头添加
@@ -28,7 +25,6 @@ export const useTagsViewStore = defineStore("tagsView", () => {
    * 添加缓存视图到缓存视图列表中
    */
   function addCachedView(view: TagView) {
-    console.log("addCachedView", visitedViews, view);
     const viewName = view.name;
     // 如果缓存视图名称已经存在于缓存视图列表中，则不再添加
     if (cachedViews.value.includes(viewName)) {
@@ -42,9 +38,9 @@ export const useTagsViewStore = defineStore("tagsView", () => {
   }
 
   /**
-   * 从已访问视图列表中删除指定的视图
+   * 删除页面
    */
-  function delVisitedView(view: TagView) {
+  function delVisitedView(view: TagView): Promise<TagView[]> {
     return new Promise((resolve) => {
       for (const [i, v] of visitedViews.value.entries()) {
         // 找到与指定视图路径匹配的视图，在已访问视图列表中删除该视图
@@ -172,8 +168,8 @@ export const useTagsViewStore = defineStore("tagsView", () => {
 
   function delAllViews() {
     return new Promise((resolve) => {
-      const affixTags = visitedViews.value.filter((tag) => tag?.affix);
-      visitedViews.value = affixTags;
+      const affixTabs = visitedViews.value.filter((tag) => tag?.affix);
+      visitedViews.value = affixTabs;
       cachedViews.value = [];
       resolve({
         visitedViews: [...visitedViews.value],
@@ -184,8 +180,8 @@ export const useTagsViewStore = defineStore("tagsView", () => {
 
   function delAllVisitedViews() {
     return new Promise((resolve) => {
-      const affixTags = visitedViews.value.filter((tag) => tag?.affix);
-      visitedViews.value = affixTags;
+      const affixTabs = visitedViews.value.filter((tag) => tag?.affix);
+      visitedViews.value = affixTabs;
       resolve([...visitedViews.value]);
     });
   }

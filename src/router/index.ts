@@ -29,7 +29,7 @@ export const constantRoutes: RouteRecordRaw[] = [
     redirect: "/dashboard",
     children: [
       {
-        path: "dashboard",
+        path: "/dashboard",
         component: () => import("@/views/dashboard/index.vue"),
         name: "Dashboard", // 用于 keep-alive, 必须与SFC自动推导或者显示声明的组件name一致
         // https://cn.vuejs.org/guide/built-ins/keep-alive.html#include-exclude
@@ -41,12 +41,12 @@ export const constantRoutes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "401",
+        path: "/401",
         component: () => import("@/views/error-page/401.vue"),
         meta: { hidden: true },
       },
       {
-        path: "404",
+        path: "/404",
         component: () => import("@/views/error-page/404.vue"),
         meta: { hidden: true },
       },

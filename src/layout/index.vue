@@ -5,8 +5,8 @@
     <el-container direction="vertical" class="relative">
       <!-- 头部 -->
       <Header />
-      <!-- 导航标签 -->
-      <NavTabs />
+      <!-- 页签 -->
+      <TagsView />
       <!-- 主体 -->
       <Main />
     </el-container>
