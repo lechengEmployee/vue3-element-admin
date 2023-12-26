@@ -2,7 +2,7 @@ import { LayoutType, ThemeType, SizeType, LanguageType } from "@/enums";
 
 const defaultSettings: AppSettings = {
   title: "vue3-element-admin",
-  version: "v2.7.0",
+  version: "v3.0.0",
   showSettings: true,
   tagsView: true,
   fixedHeader: false,
