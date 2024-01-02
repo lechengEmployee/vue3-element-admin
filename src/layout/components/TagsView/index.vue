@@ -1,5 +1,5 @@
 <template>
-  <div class="flex">
+  <div class="flex justify-between h-10">
     <el-tabs v-model="activeName" type="card" @tab-change="changeTag">
       <el-tab-pane
         v-for="item in visitedViews"
@@ -13,7 +13,7 @@
             <el-icon
               v-if="!item.affix"
               :size="12"
-              class="ml-1 hover:bg-primary rounded-full hover:color-white"
+              class="mt-[5px] ml-[5px] hover:bg-primary rounded-full hover:color-white"
               @click.stop="closeTag(item)"
             >
               <i-ep-close />
@@ -22,6 +22,13 @@
         </template>
       </el-tab-pane>
     </el-tabs>
+
+    <div
+      class="flex-center border border-gray-300 cursor-pointer w-[40px]"
+      @click="refreshSelectedTag(selectedTag)"
+    >
+      <svg-icon icon-name="refresh" />
+    </div>
 
     <!-- tag标签操作菜单 -->
     <ul
@@ -372,10 +379,48 @@ onMounted(() => {
 </script>
 <style lang="scss" scoped>
 :deep(.el-tabs) {
-  width: calc(100% - 80px);
+  width: calc(100% - 40px);
 
   .el-tabs__header {
     margin-bottom: 0;
+
+    .el-tabs__nav-wrap::after {
+      height: 0;
+    }
+
+    .el-tabs__nav-prev,
+    .el-tabs__nav-next {
+      line-height: 30px;
+    }
+
+    .el-tabs__active-bar {
+      display: none;
+    }
+
+    .el-tabs__item:nth-child(2) {
+      margin-left: 12px;
+    }
+
+    .el-tabs__item {
+      height: 31px;
+      padding: 0 4px;
+      margin-left: 8px;
+      border: 1px solid var(--el-border-color-light);
+      border-radius: 2px;
+
+      &:hover {
+        border-color: var(--el-color-primary-light-3);
+      }
+    }
+
+    .is-icon-close:hover {
+      background-color: var(--el-color-primary);
+    }
+
+    .is-active {
+      background: var(--el-color-primary-light-8);
+      border-color: var(--el-color-primary-light-3);
+    }
   }
 }
 
