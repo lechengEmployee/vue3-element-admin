@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between h-10">
+  <div class="flex justify-between">
     <el-tabs v-model="activeName" type="card" @tab-change="changeTag">
       <el-tab-pane
         v-for="item in visitedViews"
@@ -382,28 +382,10 @@ onMounted(() => {
   width: calc(100% - 40px);
 
   .el-tabs__header {
-    margin-bottom: 0;
-
-    .el-tabs__nav-wrap::after {
-      height: 0;
-    }
-
-    .el-tabs__nav-prev,
-    .el-tabs__nav-next {
-      line-height: 30px;
-    }
-
-    .el-tabs__active-bar {
-      display: none;
-    }
-
-    .el-tabs__item:nth-child(2) {
-      margin-left: 12px;
-    }
-
     .el-tabs__item {
-      height: 31px;
-      padding: 0 4px;
+      height: 30px;
+      padding: 0 2px;
+      margin-top: 4px;
       margin-left: 8px;
       border: 1px solid var(--el-border-color-light);
       border-radius: 2px;
