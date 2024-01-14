@@ -1,7 +1,7 @@
 <template>
   <el-scrollbar>
     <el-menu
-      :default-active="currentRoute.path"
+      :default-active="activeMenu"
       :collapse-transition="false"
       :collapse="!appStore.sidebarOpen"
       :unique-opened="false"
@@ -17,7 +17,7 @@
 import { useAppStore } from "@/store";
 import router from "@/router";
 
-defineProps({
+const props = defineProps({
   menus: {
     required: true,
     default: () => {
@@ -28,7 +28,9 @@ defineProps({
 });
 
 const appStore = useAppStore();
-const currentRoute = useRoute(); // 当前路由
+const activeMenu = computed(() => {
+  return router.currentRoute.value.path;
+});
 
 /**
  * 菜单激活回调

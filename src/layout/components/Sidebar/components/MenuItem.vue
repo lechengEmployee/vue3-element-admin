@@ -1,14 +1,14 @@
 <template>
-  <!-- 当前路由没有子菜单项 -->
-  <el-menu-item v-if="showMenuItem" :index="item.path">
+  <!-- 没有子菜单 -->
+  <el-menu-item v-if="showMenuItem" :index="item.path" :key="item.path">
     <menu-title
       :icon="onlyOneChild.meta?.icon"
       :title="onlyOneChild.meta?.title"
     />
   </el-menu-item>
 
-  <!-- 当前路由有子菜单项 -->
-  <el-sub-menu :index="item.path" v-else-if="!item.meta?.hidden">
+  <!-- 有子菜单 -->
+  <el-sub-menu v-else-if="!item.meta?.hidden" :index="item.path">
     <template #title>
       <menu-title :icon="item.meta?.icon" :title="item.meta?.title" />
     </template>
@@ -35,7 +35,7 @@ const showMenuItem = computed(() => {
   );
 });
 
-// 用于存储当前路由的唯一子菜单 ( 如果 item 的 chidren 只有一个子菜单，onlyOneChild 存储的就是这个子菜单)
+// 临时变量，存储唯一子菜单，如果有多个子菜单，只会存储最后一个子菜单
 const onlyOneChild = ref<any>(null);
 
 /**
@@ -45,7 +45,7 @@ function hasSingleShowingChild(
   children: RouteRecordRaw[] = [],
   parent: RouteRecordRaw
 ) {
-  // 过滤出显示的子菜单
+  //子菜单
   const showingChildren = children.filter((route: RouteRecordRaw) => {
     if (route.meta?.hidden) {
       return false;

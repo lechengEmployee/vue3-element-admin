@@ -1,6 +1,6 @@
 <template>
   <svg-icon v-if="icon" :icon-name="icon" />
-  <span v-if="title" class="ml-1">{{ translateRouteTitle(title) }}</span>
+  <span class="title" v-if="title">{{ translateRouteTitle(title) }}</span>
 </template>
 
 <script setup lang="ts">
@@ -17,3 +17,17 @@ defineProps({
   },
 });
 </script>
+
+<style scoped lang="scss">
+.el-menu {
+  .title {
+    margin-left: 5px;
+  }
+
+  &--collapse {
+    .title {
+      margin-left: 0;
+    }
+  }
+}
+</style>

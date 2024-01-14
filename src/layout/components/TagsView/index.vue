@@ -7,13 +7,15 @@
         :name="item.fullPath"
       >
         <template #label>
-          <div @contextmenu.prevent="openContextmenu($event, item)">
-            <span>{{ item.title }}</span>
-
+          <div
+            @contextmenu.prevent="openContextmenu($event, item)"
+            class="flex flex-center"
+          >
+            <span>{{ translateRouteTitle(item.title) }}</span>
             <el-icon
               v-if="!item.affix"
               :size="12"
-              class="mt-[5px] ml-[5px] hover:bg-primary rounded-full hover:color-white"
+              class="ml-1 hover:bg-primary rounded-full hover:color-white"
               @click.stop="closeTag(item)"
             >
               <i-ep-close />
@@ -23,13 +25,13 @@
       </el-tab-pane>
     </el-tabs>
 
-    <div
+    <!--     <div
       class="flex-center border border-gray-300 cursor-pointer w-[40px]"
       @click="refreshSelectedTag(selectedTag)"
     >
       <svg-icon icon-name="refresh" />
     </div>
-
+ -->
     <!-- tag标签操作菜单 -->
     <ul
       v-show="contextmenuVisible"
@@ -68,6 +70,7 @@
 import { useTagsViewStore, usePermissionStore } from "@/store";
 import { RouteRecordRaw } from "vue-router";
 import { TabPaneName } from "element-plus";
+import { translateRouteTitle } from "@/utils/i18n";
 
 const router = useRouter();
 const route = useRoute();
@@ -94,7 +97,7 @@ watch(
     activeName.value = newFullPath;
   },
   {
-    immediate: true, //初始化立即执行
+    immediate: true,
   }
 );
 
@@ -184,10 +187,10 @@ function closeTag(view: TagView) {
 /**
  *  切换页签
  *
- * @param targetFullPath
+ * @param targetPath
  */
-function changeTag(targetFullPath: TabPaneName) {
-  router.push(targetFullPath as string);
+function changeTag(targetPath: TabPaneName) {
+  router.push(targetPath as string);
 }
 
 /**
@@ -379,24 +382,21 @@ onMounted(() => {
 </script>
 <style lang="scss" scoped>
 :deep(.el-tabs) {
-  width: calc(100% - 40px);
+  width: 100%;
 
   .el-tabs__header {
+    margin: 0;
+
     .el-tabs__item {
       height: 30px;
-      padding: 0 2px;
-      margin-top: 4px;
-      margin-left: 8px;
+      padding: 0 8px !important;
+      margin: 4px 0 0 5px;
       border: 1px solid var(--el-border-color-light);
       border-radius: 2px;
 
       &:hover {
         border-color: var(--el-color-primary-light-3);
       }
-    }
-
-    .is-icon-close:hover {
-      background-color: var(--el-color-primary);
     }
 
     .is-active {
